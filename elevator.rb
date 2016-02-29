@@ -1,25 +1,41 @@
-class Building
-  attr_accessor :floors
+class Elevator
+  attr_accessor :floor
+  attr_reader :greeting
 
-  def initialize(floors) # this is to set the floors for the elevator, 1-4
-    floors = [1, 2, 3, 4]
-    @floors = floors
+  def initialize
+    @floor = 2
+    @floor_max = 4 
+  end 
+
+  def floor_up
+    @floor += 1 unless @floor == @floor_max
   end
 
-  def elevator  # I am trying to get the elevator to start with a random floor number
-    puts "Welcome! You are on floor number " + rand(4).to_s + ". Please select which floor you would like to go to."
-    choice = gets.to_i
+  def floor_down
+    @floor -= 1 unless @floor == 1
   end
 
-  if choice < 1 || choice > 4 # I am trying here to get a statement that says if the floor selected is less than one or greater than four to give the error message
-    puts "I'm sorry, but the this is not an option."
-  else
-    puts "Thank you, we are now going to floor #{@floors[choice]}"  # I am trying to get this to say where the elevator is going
-    puts "We have arrived at floor #{@floors[choice]}"        # And this is supposed to great when the elevator arrives
+  def greeting
+    "Welcome to floor #{@floor}"
   end
 
+  # def greeting
+  #   "Welcome to floor #{my_floor}"
+  # end
+
+  def floor=(floor)
+    unless floor > @floor_max || floor < 1
+      @floor = floor
+    end
+  end
 end
 
+my_floor = Elevator.new
 
 
-
+puts my_floor.floor_up
+puts my_floor.greeting
+puts my_floor.floor_up
+puts my_floor.greeting
+puts my_floor.floor_down
+puts my_floor.greeting
